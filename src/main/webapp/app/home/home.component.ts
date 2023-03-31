@@ -33,4 +33,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  clickGame() {
+    console.log('clicked');
+    this.router.navigate(['/game']);
+  }
 }

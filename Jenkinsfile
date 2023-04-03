@@ -4,10 +4,6 @@ node {
     stage('checkout') {
         checkout scm
     }
-    stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
     docker.image('jhipster/jhipster:v7.9.3').inside('-u root -e MAVEN_OPTS="-Duser.home=./"') {
         stage('check java') {
             sh "java -version"

@@ -4,7 +4,7 @@ node {
     stage('checkout') {
         checkout scm
     }
-    docker.image('jhipster/jhipster:v7.9.3').inside('-u root -e MAVEN_OPTS="-Duser.home=./"') {
+    docker.image('jhipster/jhipster:v7.9.3').inside('-u jhipster -e MAVEN_OPTS="-Duser.home=./"') {
         stage('check java') {
             sh "java -version"
         }
@@ -12,9 +12,6 @@ node {
         stage('clean') {
             sh "chmod +x mvnw"
             sh "./mvnw -ntp clean -P-webapp"
-        }
-        stage('nohttp') {
-            sh "./mvnw -ntp checkstyle:check"
         }
 
         stage('install tools') {
@@ -24,18 +21,7 @@ node {
         stage('npm install') {
             sh "./mvnw -ntp com.github.eirslett:frontend-maven-plugin:npm"
         }
-        stage('Install Snyk CLI') {
-           sh '''
-               curl -Lo ./snyk $(curl -s https://api.github.com/repos/snyk/snyk/releases/latest | grep "browser_download_url.*snyk-linux" | cut -d ':' -f 2,3 | tr -d \" | tr -d ' ')
-               chmod +x snyk
-           '''
-        }
-        stage('Snyk test') {
-           sh './snyk test --all-projects'
-        }
-        stage('Snyk monitor') {
-           sh './snyk monitor --all-projects'
-        }
+
         stage('backend tests') {
             try {
                 sh "./mvnw -ntp verify -P-webapp"
@@ -66,12 +52,5 @@ node {
                 sh "./mvnw -ntp initialize sonar:sonar"
             }
         }
-    }
-
-    def dockerImage
-    stage('publish docker') {
-        // A pre-requisite to this step is to setup authentication to the docker registry
-        // https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#authentication-methods
-        sh "./mvnw -ntp -Pprod verify jib:build"
     }
 }

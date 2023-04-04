@@ -109,4 +109,12 @@ describe('Home Component', () => {
       expect(comp.account).toEqual(account);
     });
   });
+
+  describe('game', () => {
+    it('should navigate to /game on click game', () => {
+      comp.clickGame();
+
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['/game']);
+    });
+  });
 });

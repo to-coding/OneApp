@@ -4,7 +4,7 @@ This application was generated using JHipster 7.9.3, you can find documentation 
 
 Jira: https://one-app.atlassian.net/jira/software/projects/ON/boards/1
 
-Jenkins: http://43.139.113.189:18080
+Jenkins: 43.139.113.189:18080
 
 ## Project Structure
 
@@ -61,7 +61,7 @@ JHipster ships with PWA (Progressive Web App) support, and it's turned off by de
 The service worker initialization code is disabled by default. To enable it, uncomment the following code in `src/main/webapp/app/app.module.ts`:
 
 ```typescript
-ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+ServiceWorkerModule.register('ngsw-worker.js', { enabled: false });
 ```
 
 ### Managing dependencies

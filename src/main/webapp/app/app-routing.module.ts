@@ -34,6 +34,10 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
         },
         {
           path: 'game',
+          data: {
+            authorities: [Authority.ADMIN, Authority.USER],
+          },
+          canActivate: [UserRouteAccessService],
           loadChildren: () => import('./game/game.module').then(m => m.GameModule),
         },
         navbarRoute,

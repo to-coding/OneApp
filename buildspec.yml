@@ -13,4 +13,4 @@ artifacts:
   files:
     - target/one-app-0.0.1-SNAPSHOT.jar
     - appspec.yml
-    - buildspec.yml
+    - 'scripts/**/*'

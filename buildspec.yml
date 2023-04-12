@@ -4,11 +4,11 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - ./mvnw clean
+      - mvn clean
   post_build:
     commands:
       - echo Build completed on `date`
-      - ./mvnw -Pdev clean verify
+      - mvn package
 artifacts:
   files:
     - target/one-app-0.0.1-SNAPSHOT.jar

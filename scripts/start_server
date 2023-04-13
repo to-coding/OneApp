@@ -1,3 +1,4 @@
 #!/bin/bash
 cd /home/ubuntu/oneapp
+su ubuntu
 nohup java -jar one-app-0.0.1-SNAPSHOT.jar &
